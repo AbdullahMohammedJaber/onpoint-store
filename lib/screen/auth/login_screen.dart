@@ -175,37 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     SizedBox(height: 10),
                                     Row(
-                                      children: [
-                                        Expanded(
-                                          child: Divider(
-                                            color: ColorManager.textGrey,
-                                            thickness: 0.5,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 2,
-                                          ),
-                                          child: DefaultText(
-                                            "Or Login with",
-                                            fontSize: 7,
-                                            fontWeight: FontWeight.w500,
-                                            color: ColorManager.greyColor,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Divider(
-                                            color: ColorManager.textGrey,
-                                            thickness: 0.5,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-
-                                    buildSocialAuth(context),
-                                    SizedBox(height: 10),
-                                    Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [

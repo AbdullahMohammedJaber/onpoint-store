@@ -12,7 +12,8 @@ class StringApp {
   static String passwordLessDigit = "The password less 8 digit".tr();
 
   static String passwordNotContainChar =
-      "The password must contain letters, symbols and numbers".tr();
+      "The password must be at least 8 characters and contain at least one letter"
+          .tr();
   static String emailFalse = "Please enter a valid email".tr();
 
   static String noInternet = "No Internet Connection".tr();

@@ -47,6 +47,7 @@ dependencies:
   equatable: ^2.0.5
   cherry_toast: ^1.13.0
   page_transition: ^2.1.0
+  image_picker: ^1.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

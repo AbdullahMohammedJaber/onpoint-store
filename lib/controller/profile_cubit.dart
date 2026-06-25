@@ -33,6 +33,23 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(state.copyWith(isEditing: false));
   }
 
+  void updateProfileImage(String imagePath) {
+    final current = state.user;
+    if (current == null || imagePath.trim().isEmpty) {
+      return;
+    }
+
+    final updated = current.copyWith(avatarPath: imagePath.trim());
+    _mockUser = updated;
+    emit(
+      state.copyWith(
+        status: ProfileStatus.success,
+        user: updated,
+        message: 'profile_image_updated',
+      ),
+    );
+  }
+
   Future<void> saveProfile({
     required String name,
     required String email,

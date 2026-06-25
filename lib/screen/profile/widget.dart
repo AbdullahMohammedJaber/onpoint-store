@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:io';
+
 import 'package:ecommerce_one/core/localization/app_localizations.dart';
 import 'package:ecommerce_one/core/models/user_model.dart';
 import 'package:ecommerce_one/controller/profile_cubit.dart';
@@ -13,6 +15,7 @@ import 'package:ecommerce_one/utils/theme/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 Widget profileCard(BuildContext context, UserModel user) {
   return Card(
@@ -23,7 +26,7 @@ Widget profileCard(BuildContext context, UserModel user) {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          _avatar(user.avatarAsset),
+          _avatar(context, user),
           SizedBox(height: hi * 0.02),
           DefaultText(user.name, fontSize: 16, fontWeight: FontWeight.w600),
           SizedBox(height: hi * 0.01),
@@ -42,7 +45,7 @@ Widget profileCard(BuildContext context, UserModel user) {
             title: context.tr('favorites'),
             onTap: () => ToWithFade(AppRoutes.favorites),
           ),
-          _menuItemButton(
+          _menuItemSwitch(
             icon: "assets/icons/notification_home.svg",
             title: context.tr('notifications'),
           ),
@@ -82,26 +85,35 @@ Widget _menuItem({
   );
 }
 
-Widget _menuItemButton({required String icon, required String title}) {
-  return ListTile(
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-    leading: Container(
-      height: 40,
-      width: 40,
-      decoration: BoxDecoration(
-        color: ColorManager.primaryColor.withOpacity(.1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: SvgPicture.asset(
-          icon,
-          color: ColorManager.primaryColor,
-          width: 18,
+Widget _menuItemSwitch({required String icon, required String title}) {
+  bool enabled = true;
+
+  return StatefulBuilder(
+    builder: (context, setState) {
+      return ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+        leading: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            color: ColorManager.primaryColor.withOpacity(.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Center(
+            child: SvgPicture.asset(
+              icon,
+              color: ColorManager.primaryColor,
+              width: 18,
+            ),
+          ),
         ),
-      ),
-    ),
-    title: DefaultText(title, fontSize: 14, fontWeight: FontWeight.w500),
-    trailing: Switch(value: true, onChanged: (value) {}),
+        title: DefaultText(title, fontSize: 14, fontWeight: FontWeight.w500),
+        trailing: Switch(
+          value: enabled,
+          onChanged: (value) => setState(() => enabled = value),
+        ),
+      );
+    },
   );
 }
 
@@ -301,27 +313,85 @@ Widget _infoRow(BuildContext context, String title, String value) {
   );
 }
 
-Widget _avatar(String avatarAsset) {
+Widget _avatar(BuildContext context, UserModel user) {
+  final imageProvider =
+      user.avatarPath == null
+          ? AssetImage(user.avatarAsset) as ImageProvider
+          : FileImage(File(user.avatarPath!));
+
   return Stack(
     alignment: Alignment.bottomRight,
     children: [
-      CircleAvatar(radius: 46, backgroundImage: AssetImage(avatarAsset)),
-      Container(
-        height: 34,
-        width: 34,
-        decoration: BoxDecoration(
-          color: ColorManager.primaryColor,
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.white, width: 3),
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            "assets/icons/camera.svg",
-            width: 16,
-            color: Colors.white,
+      CircleAvatar(radius: 46, backgroundImage: imageProvider),
+      InkWell(
+        onTap: () => _pickProfileImage(context),
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          height: 34,
+          width: 34,
+          decoration: BoxDecoration(
+            color: ColorManager.primaryColor,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white, width: 3),
+          ),
+          child: Center(
+            child: SvgPicture.asset(
+              "assets/icons/camera.svg",
+              width: 16,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
     ],
   );
+}
+
+Future<void> _pickProfileImage(BuildContext context) async {
+  final source = await showModalBottomSheet<ImageSource>(
+    context: context,
+    builder:
+        (context) => SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library_outlined),
+                title: Text(context.tr('choose_from_gallery')),
+                onTap: () => Navigator.pop(context, ImageSource.gallery),
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_camera_outlined),
+                title: Text(context.tr('take_photo')),
+                onTap: () => Navigator.pop(context, ImageSource.camera),
+              ),
+            ],
+          ),
+        ),
+  );
+
+  if (source == null || !context.mounted) {
+    return;
+  }
+
+  try {
+    final image = await ImagePicker().pickImage(
+      source: source,
+      imageQuality: 85,
+      maxWidth: 1200,
+    );
+    if (image == null || !context.mounted) {
+      return;
+    }
+
+    context.read<ProfileCubit>().updateProfileImage(image.path);
+  } catch (_) {
+    if (!context.mounted) {
+      return;
+    }
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(context.tr('unable_to_pick_image'))));
+  }
 }

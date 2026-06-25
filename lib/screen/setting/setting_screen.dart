@@ -4,6 +4,8 @@ import 'package:ecommerce_one/core/localization/app_localizations.dart';
 import 'package:ecommerce_one/core/widgets/app_title_bar.dart';
 import 'package:ecommerce_one/controller/app_settings_cubit.dart';
 import 'package:ecommerce_one/controller/app_settings_state.dart';
+import 'package:ecommerce_one/route/app_routes.dart';
+import 'package:ecommerce_one/route/control_route.dart';
 import 'package:ecommerce_one/screen/setting/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +37,7 @@ class SettingScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-             
+
                       secondary: const Icon(Icons.dark_mode_outlined),
                       title: Text(context.tr('dark_mode')),
                       value: state.isDarkMode,
@@ -49,7 +51,7 @@ class SettingScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                       
+
                       leading: const Icon(Icons.language_outlined),
                       title: Text(context.tr('language')),
                       subtitle: Text(
@@ -76,15 +78,15 @@ class SettingScreen extends StatelessWidget {
               context: context,
               icon: Icons.privacy_tip_outlined,
               title: context.tr('privacy_policy'),
-              onTap: () {},
+              onTap: () => ToWithFade(AppRoutes.privacyPolicy),
             ),
             const SizedBox(height: 12),
 
             buildInfoCard(
               context: context,
               icon: Icons.assignment_return_outlined,
-              title: context.tr('return_policy'),
-              onTap: () {},
+              title: context.tr('terms_of_use'),
+              onTap: () => ToWithFade(AppRoutes.termsOfUse),
             ),
             const SizedBox(height: 12),
 
@@ -92,7 +94,7 @@ class SettingScreen extends StatelessWidget {
               context: context,
               icon: Icons.info_outline,
               title: context.tr('about_us'),
-              onTap: () {},
+              onTap: () => ToWithFade(AppRoutes.aboutUs),
             ),
             const SizedBox(height: 12),
 
@@ -100,7 +102,7 @@ class SettingScreen extends StatelessWidget {
               context: context,
               icon: Icons.contact_support_outlined,
               title: context.tr('contact_us'),
-              onTap: () {},
+              onTap: () => ToWithFade(AppRoutes.contactUs),
             ),
 
             const SizedBox(height: 20),

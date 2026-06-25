@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 bool isPasswordValid(String password) {
-  return RegExp(r'^(?=.*[a-zA-Z])(?=.*[!@#$&*~]).{8,}$').hasMatch(password);
+  return RegExp(r'^(?=.*[a-zA-Z]).{8,}$').hasMatch(password);
 }
 
 bool isEmailValid(String email) {

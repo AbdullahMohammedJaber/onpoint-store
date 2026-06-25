@@ -147,13 +147,13 @@ class _LoginScreenState extends State<CreateAccountScreen> {
                                       validator: (p0) {
                                         if (password.text.isEmpty) {
                                           return StringApp.requiredField;
-                                        } else if (isPasswordValid(
+                                        } else if (password.text.length < 8) {
+                                          return StringApp.passwordLessDigit;
+                                        } else if (!isPasswordValid(
                                           password.text,
                                         )) {
                                           return StringApp
                                               .passwordNotContainChar;
-                                        } else if (password.text.length < 8) {
-                                          return StringApp.passwordLessDigit;
                                         }
                                         return null;
                                       },
@@ -174,13 +174,13 @@ class _LoginScreenState extends State<CreateAccountScreen> {
                                       validator: (p0) {
                                         if (cPassword.text.isEmpty) {
                                           return StringApp.requiredField;
-                                        } else if (isPasswordValid(
+                                        } else if (cPassword.text.length < 8) {
+                                          return StringApp.passwordLessDigit;
+                                        } else if (!isPasswordValid(
                                           cPassword.text,
                                         )) {
                                           return StringApp
                                               .passwordNotContainChar;
-                                        } else if (cPassword.text.length < 8) {
-                                          return StringApp.passwordLessDigit;
                                         }
                                         return null;
                                       },
@@ -205,37 +205,6 @@ class _LoginScreenState extends State<CreateAccountScreen> {
                                       },
                                       title: "Create Account",
                                     ),
-                                    SizedBox(height: 10),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Divider(
-                                            color: ColorManager.textGrey,
-                                            thickness: 0.5,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 2,
-                                          ),
-                                          child: DefaultText(
-                                            "Or Login with",
-                                            fontSize: 7,
-                                            fontWeight: FontWeight.w500,
-                                            color: ColorManager.greyColor,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Divider(
-                                            color: ColorManager.textGrey,
-                                            thickness: 0.5,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 5),
-
-                                    buildSocialAuth(context),
                                     SizedBox(height: 10),
                                     Row(
                                       mainAxisAlignment:

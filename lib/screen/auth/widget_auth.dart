@@ -8,7 +8,6 @@ import 'package:ecommerce_one/utils/services/defulat_text.dart';
 import 'package:ecommerce_one/utils/theme/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 Widget formAuth(
   BuildContext context, {
@@ -42,46 +41,6 @@ Widget formAuth(
           textInputType: textInputType,
           obscureText: obscureText ?? false,
         ),
-      ),
-    ],
-  );
-}
-
-Widget buildSocialAuth(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Container(
-        height: 40,
-        width: 65,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: ColorManager.borderBlue, width: 1),
-        ),
-        child: Center(child: SvgPicture.asset("assets/icons/facebook_ic.svg")),
-      ),
-      SizedBox(width: 5),
-      Container(
-        height: 40,
-        width: 65,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: ColorManager.borderBlue, width: 1),
-        ),
-        child: Center(child: SvgPicture.asset("assets/icons/google_ic.svg")),
-      ),
-      SizedBox(width: 5),
-      Container(
-        height: 40,
-        width: 65,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: ColorManager.borderBlue, width: 1),
-        ),
-        child: Center(child: SvgPicture.asset("assets/icons/cib_apple.svg")),
       ),
     ],
   );

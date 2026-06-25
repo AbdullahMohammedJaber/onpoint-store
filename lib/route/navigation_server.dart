@@ -13,6 +13,7 @@ import 'package:ecommerce_one/screen/product/all_product.dart';
 import 'package:ecommerce_one/screen/product/product_details_screen.dart';
 import 'package:ecommerce_one/screen/root/root_app.dart';
 import 'package:ecommerce_one/screen/setting/setting_screen.dart';
+import 'package:ecommerce_one/screen/setting/static_info_screen.dart';
 import 'package:ecommerce_one/screen/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,23 @@ class NavigationService {
         return HomeScreen2();
       case AppRoutes.settingsScreen:
         return SettingScreen();
+      case AppRoutes.privacyPolicy:
+        return StaticInfoScreen(
+          titleKey: 'privacy_policy',
+          bodyKey: 'privacy_policy_body',
+        );
+      case AppRoutes.termsOfUse:
+        return StaticInfoScreen(
+          titleKey: 'terms_of_use',
+          bodyKey: 'terms_body',
+        );
+      case AppRoutes.aboutUs:
+        return StaticInfoScreen(titleKey: 'about_us', bodyKey: 'about_us_body');
+      case AppRoutes.contactUs:
+        return StaticInfoScreen(
+          titleKey: 'contact_us',
+          bodyKey: 'contact_us_body',
+        );
       case AppRoutes.login:
         return LoginScreen();
       case AppRoutes.homeScreen:

@@ -14,4 +14,8 @@ class AppRoutes {
   static const String favorites = '/favorites';
   static const String orders = '/orders';
   static const String settingsScreen = '/settingsScreen';
+  static const String privacyPolicy = '/privacyPolicy';
+  static const String termsOfUse = '/termsOfUse';
+  static const String aboutUs = '/aboutUs';
+  static const String contactUs = '/contactUs';
 }
