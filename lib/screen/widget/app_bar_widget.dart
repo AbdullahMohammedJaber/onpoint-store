@@ -56,8 +56,9 @@ class AppBarWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(
                           "assets/images/app_logo.png",
-                          height: 32,
-                          width: 32,
+                          height: 40,
+                          width: 40,
+                          
                         ),
                       ),
                       SizedBox(width: 8),

@@ -67,8 +67,8 @@ class _SplashScreenState extends State<SplashScreen>
             end: Alignment.bottomRight,
             colors:
                 isDark
-                    ? const [Color(0xff161616), Color(0xff2A160C)]
-                    : const [Color(0xffFFF7F1), Color(0xffFFE4D1)],
+                    ? const [Color(0xff111111), Color(0xff1C1C1C)]
+                    : const [Color(0xffFFFFFF), Color(0xffF6F7F9)],
           ),
         ),
         child: SafeArea(
@@ -89,13 +89,11 @@ class _SplashScreenState extends State<SplashScreen>
                           width: 130,
                           padding: const EdgeInsets.all(24),
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: Colors.white,
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: ColorManager.primaryColor.withValues(
-                                  alpha: .25,
-                                ),
+                                color: Colors.black.withValues(alpha: .12),
                                 blurRadius: 35,
                                 offset: const Offset(0, 18),
                               ),
