@@ -35,7 +35,7 @@ class AppBarWidget extends StatelessWidget {
       children: [
         SizedBox(
           height: hi * 0.075,
-          
+
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             child: Row(
@@ -52,7 +52,14 @@ class AppBarWidget extends StatelessWidget {
                 else
                   Row(
                     children: [
-                      Image.asset("assets/images/logo.png"),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          "assets/images/app_logo.png",
+                          height: 32,
+                          width: 32,
+                        ),
+                      ),
                       SizedBox(width: 8),
                       DefaultText(
                         context.tr('slogan'),
@@ -99,95 +106,99 @@ class AppBarWidget extends StatelessWidget {
             children: [
               SizedBox(height: hi * 0.003),
               Padding(
-               padding: const EdgeInsets.symmetric(
-                 horizontal: 12,
-                 vertical: 12,
-               ),
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 crossAxisAlignment: CrossAxisAlignment.center,
-                 children: [
-                   Expanded(
-                     child: TextFormField(
-                       controller: effectiveController,
-                       onFieldSubmitted: onSearch,
-                       decoration: InputDecoration(
-                         fillColor:
-                             Theme.of(context).scaffoldBackgroundColor,
-                         filled: true,
-                         hintText: context.tr('search_hint'),
-                         prefixIcon: Row(
-                           mainAxisSize: MainAxisSize.min,
-                           children: [
-                             SizedBox(width: wi * 0.05),
-                             SvgPicture.asset("assets/icons/search.svg"),
-                           ],
-                         ),
-              
-                         suffixIcon:
-                             filter
-                                 ? Row(
-                                   mainAxisSize: MainAxisSize.min,
-                                   children: [
-                                     SizedBox(width: wi * 0.05),
-                                     GestureDetector(
-                                       onTap: onTapFilter,
-                                       child: Container(
-                                         width: 50,
-                                         height: 45,
-                                         color: Colors.transparent,
-                                         child: Center(
-                                           child: SvgPicture.asset(
-                                             "assets/icons/filter.svg",
-                                           ),
-                                         ),
-                                       ),
-                                     ),
-                                   ],
-                                 )
-                                 : null,
-                         border: OutlineInputBorder(
-                           borderRadius:context.locale.languageCode == 'ar'? BorderRadius.only(
-                             bottomRight: Radius.circular(8),
-                             topRight: Radius.circular(8),
-                           ): BorderRadius.only(
-                             bottomLeft: Radius.circular(8),
-                             topLeft: Radius.circular(8),
-                           ),
-                           borderSide: BorderSide.none,
-                         ),
-                       ),
-                     ),
-                   ),
-                   Container(
-                     width: wi * 0.25,
-                     height: 48,
-                     decoration: BoxDecoration(
-                       color: ColorManager.primaryColor,
-                        borderRadius:context.locale.languageCode == 'ar'? BorderRadius.only(
-                         bottomLeft: Radius.circular(8),
-                         topLeft: Radius.circular(8),
-                       ) : BorderRadius.only(
-                         bottomRight: Radius.circular(8),
-                         topRight: Radius.circular(8),
-                       ),
-                     ),
-                     child: Center(
-                       child: GestureDetector(
-                         onTap:
-                             () => onSearch?.call(effectiveController.text),
-                         child: DefaultText(
-                           context.tr('search'),
-                           color: ColorManager.whiteColor,
-                           fontSize: 12,
-                           fontWeight: FontWeight.w500,
-                         ),
-                       ),
-                     ),
-                   ),
-                 ],
-               ),
-                              ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 12,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: effectiveController,
+                        onFieldSubmitted: onSearch,
+                        decoration: InputDecoration(
+                          fillColor: Theme.of(context).scaffoldBackgroundColor,
+                          filled: true,
+                          hintText: context.tr('search_hint'),
+                          prefixIcon: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox(width: wi * 0.05),
+                              SvgPicture.asset("assets/icons/search.svg"),
+                            ],
+                          ),
+
+                          suffixIcon:
+                              filter
+                                  ? Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SizedBox(width: wi * 0.05),
+                                      GestureDetector(
+                                        onTap: onTapFilter,
+                                        child: Container(
+                                          width: 50,
+                                          height: 45,
+                                          color: Colors.transparent,
+                                          child: Center(
+                                            child: SvgPicture.asset(
+                                              "assets/icons/filter.svg",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                  : null,
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                context.locale.languageCode == 'ar'
+                                    ? BorderRadius.only(
+                                      bottomRight: Radius.circular(8),
+                                      topRight: Radius.circular(8),
+                                    )
+                                    : BorderRadius.only(
+                                      bottomLeft: Radius.circular(8),
+                                      topLeft: Radius.circular(8),
+                                    ),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: wi * 0.25,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: ColorManager.primaryColor,
+                        borderRadius:
+                            context.locale.languageCode == 'ar'
+                                ? BorderRadius.only(
+                                  bottomLeft: Radius.circular(8),
+                                  topLeft: Radius.circular(8),
+                                )
+                                : BorderRadius.only(
+                                  bottomRight: Radius.circular(8),
+                                  topRight: Radius.circular(8),
+                                ),
+                      ),
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () => onSearch?.call(effectiveController.text),
+                          child: DefaultText(
+                            context.tr('search'),
+                            color: ColorManager.whiteColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
       ],

@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen>
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
     _controller.forward();
-    _timer = Timer(const Duration(milliseconds: 1800), () {
+    _timer = Timer(const Duration(milliseconds: 3000), () {
       if (mounted) ToRemoveAll(AppRoutes.root);
     });
   }
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen>
                           width: 130,
                           padding: const EdgeInsets.all(24),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
+                            color: Colors.black,
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
@@ -101,7 +101,7 @@ class _SplashScreenState extends State<SplashScreen>
                               ),
                             ],
                           ),
-                          child: Image.asset('assets/images/logo.png'),
+                          child: Image.asset('assets/images/app_logo.png'),
                         ),
                       ),
                       const SizedBox(height: 28),
